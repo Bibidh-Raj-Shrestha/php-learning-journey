@@ -25,7 +25,8 @@
         echo $_SESSION["error"];
         unset($_SESSION["error"]);
     }
-    foreach($_SESSION["tasks"] as $t){
-            echo $t . "<br>";
+    foreach($_SESSION["tasks"] as $key => $t){
+            echo $t . "  ";
+            echo "<a href='delete.php?id=$key'>Delete</a><br>";
     }
 ?>
