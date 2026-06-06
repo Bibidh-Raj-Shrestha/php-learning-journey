@@ -6,7 +6,7 @@
     <title>Grade calculator</title>
 </head>
 <body>
-    <form action="<?php $_SERVER["PHP_SELF"] ?>" method="post">
+    <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
         <label for="english">English:</label>
         <input type="number" name="english" id="english" min=0 max=100>
         <br>
@@ -41,33 +41,35 @@
         $math = $_POST["math"];
         $social = $_POST["social"];
 
-        if(empty($eng) || empty($nep) || empty($com) || empty($com) || empty($math) || empty($social)){
-            echo"Input every field";
+        if ($_POST["english"] === "" || $_POST["nepali"] === "" || $_POST["computer"] === "" || $_POST["math"] === "" || $_POST["social"] === ""){
+                echo"Input fields cannot be empty";
         }
         else{
             $sum = $eng + $nep + $com + $math + $social;
             $percentage = ($sum/500) * 100;
 
             echo"Total Marks: {$sum}/500<br>";
-            echo"Percentage: {$percentage} <br>";
-            switch($percentage){
-                case $percentage>=90 && $percentage<=100:
-                    echo"Grade: A+";
-                    break;
-                case $percentage>=80 && $percentage<=89:
-                    echo"Grade: A";
-                    break;
-                case $percentage>=70 && $percentage<=79:
-                    echo"Grade: B";
-                    break;
-                case $percentage>=60 && $percentage<=69:
-                    echo"Grade: C";
-                    break;
-                case $percentage>=50 && $percentage<=59:
-                    echo"Grade: D";
-                    break;
-                default:
-                    echo"Grade : F";
+            echo"Percentage:" . round($percentage,2) . "<br>";
+            if ($eng < 0 || $eng > 100 || $nep < 0 || $nep > 100 || $com < 0 || $com > 100 || $math < 0 || $math > 100 || $social < 0 || $social > 100){
+                echo "Marks must be between 0 and 100";
+            }
+            if ($percentage >= 90) {
+                echo "Grade : A+";
+            }
+            elseif ($percentage >= 80) {
+                echo "Grade : A";
+            }
+            elseif ($percentage >= 70) {
+                echo "Grade : B";
+            }
+            elseif ($percentage >= 60) {
+                echo "Grade : C";
+            }
+            elseif ($percentage >= 50) {
+                echo "Grade : D";
+            }
+            else {
+                echo "Grade : F";
             }
         }
     }
