@@ -18,7 +18,7 @@
     <p>Task:</p>
     <?php 
         foreach($tasks as $key => $task){
-            echo $task;
+            echo $task . " ";
             echo "<a href='delete.php?id=$key'>delete</a> <br>";
         }
     ?>
